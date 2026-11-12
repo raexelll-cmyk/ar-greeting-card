@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My AR Greeting Card</title>
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <!-- AR.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #instructions {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #b83260;
+            text-align: center;
+            padding: 12px;
+            border-radius: 15px;
+            z-index: 10;
+            box-shadow: 0 3px 12px #0003;
+        }
+
+        #instructions h2 {
+            margin: 0 0 5px;
+        }
+
+        #instructions p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 12px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 3px black;
+            z-index: 10;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="instructions">
+        <h2>💌 AR Greeting Card</h2>
+        <p>Point your camera at the HIRO marker.</p>
+        <p>Discover your special surprise! ❤️</p>
+    </div>
+
+    <div id="footer">
+        Made with love using Augmented Reality
+    </div>
+
+    <a-scene
+        embedded
+        vr-mode-ui="enabled: false"
+        renderer="logarithmicDepthBuffer: true;"
+        arjs="sourceType: webcam; debugUIEnabled: false;">
+
+        <!-- HIRO Marker -->
+        <a-marker
+            preset="hiro"
+            smooth="true">
+
+            <!-- Greeting Card Background -->
+            <a-plane
+                position="0 0.2 0"
+                rotation="-90 0 0"
+                width="2"
+                height="1.4"
+                color="#ffe4ec"
+                material="side: double;">
+
+            </a-plane>
+
+            <!-- Main Greeting -->
+            <a-text
+                value="A SPECIAL MESSAGE"
+                position="0 0.65 0"
+                rotation="-90 0 0"
+                align="center"
+                color="#b83260"
+                width="3"
+                scale="0.7 0.7 0.7">
+            </a-text>
+
+            <!-- Heart -->
+            <a-entity
+                position="0 1.0 0"
+                animation="
+                    property: position;
+                    to: 0 1.2 0;
+                    dur: 1000;
+                    direction: alternate;
+                    loop: true;
+                    easing: easeInOutSine;">
+
+                <a-sphere
+                    position="-0.12 0 0"
+                    radius="0.16"
+                    color="#ff1744">
+                </a-sphere>
+
+                <a-sphere
+                    position="0.12 0 0"
+                    radius="0.16"
+                    color="#ff1744">
+                </a-sphere>
+
+                <a-cone
+                    position="0 -0.15 0"
+                    rotation="0 0 180"
+                    radius-bottom="0.23"
+                    radius-top="0"
+                    height="0.35"
+                    color="#ff1744">
+                </a-cone>
+
+            </a-entity>
+
+            <!-- Greeting Message -->
+            <a-text
+                value="You are amazing!"
+                position="0 0.85 0.35"
+                rotation="-90 0 0"
+                align="center"
+                color="#8e2450"
+                width="3"
+                scale="0.55 0.55 0.55">
+            </a-text>
+
+            <a-text
+                value="Wishing you happiness"
+                position="0 0.65 0.52"
+                rotation="-90 0 0"
+                align="center"
+                color="#8e2450"
+                width="3"
+                scale="0.38 0.38 0.38">
+            </a-text>
+
+            <a-text
+                value="and beautiful memories!"
+                position="0 0.52 0.52"
+                rotation="-90 0 0"
+                align="center"
+                color="#8e2450"
+                width="3"
+                scale="0.38 0.38 0.38">
+            </a-text>
+
+            <!-- Floating Decorations -->
+            <a-sphere
+                position="-0.65 0.9 0.2"
+                radius="0.07"
+                color="#ff80ab"
+                animation="
+                    property: position;
+                    to: -0.65 1.2 0.2;
+                    dur: 1500;
+                    direction: alternate;
+                    loop: true;">
+            </a-sphere>
+
+            <a-sphere
+                position="0.65 0.9 0.2"
+                radius="0.07"
+                color="#ffca28"
+                animation="
+                    property: position;
+                    to: 0.65 1.2 0.2;
+                    dur: 1800;
+                    direction: alternate;
+                    loop: true;">
+            </a-sphere>
+
+            <!-- Signature -->
+            <a-text
+                value="With Love ❤️"
+                position="0 0.4 -0.35"
+                rotation="-90 0 0"
+                align="center"
+                color="#c2185b"
+                width="3"
+                scale="0.45 0.45 0.45">
+            </a-text>
+
+        </a-marker>
+
+        <!-- Camera -->
+        <a-entity camera></a-entity>
+
+    </a-scene>
+
+</body>
+</html>
